@@ -12,5 +12,5 @@ async def test_python(dut):
     dut.key.value = input_key
     await Timer(1, units='ns')
     for i in range(9):
-        exec(f"print('@@@@@@',hex(dut.en_key{i}.value),'@@@@@@')")
-    print("$$$$$$",hex(dut.en_key.value),"$$$")
+        exec(f"print('key for {i+1}th round is :',hex(dut.en_key{i}.value))")
+    print("final round key: ",hex(dut.en_key.value))
