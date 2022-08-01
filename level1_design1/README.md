@@ -1,53 +1,34 @@
-# Adder Design Verification
+# MUX
 
-The verification environment is setup using [Vyoma's UpTickPro](https://vyomasystems.com) provided for the hackathon.
-
-*Make sure to include the Gitpod id in the screenshot*
-
-![](https://i.imgur.com/miWGA1o.png)
+![image](./level1design1_images/gitpod.png)
 
 ## Verification Environment
+The testbench drives inputs to the Design Under Test using dut.&lt;input-port-name&gt;.value = &lt;value&gt;
 
-The [CoCoTb](https://www.cocotb.org/) based Python test is developed as explained. The test drives inputs to the Design Under Test (adder module here) which takes in 4-bit inputs *a* and *b* and gives 5-bit output *sum*
 
-The values are assigned to the input port using 
+The assert statement is used for comparing the output from the mux with the expected value.
+
 ```
-dut.a.value = 7
-dut.b.value = 5
+assert int(dut.out.value) == input_value[i], f"input :{eval(f'dut.inp{i}.value')}\t Select line : {i}  \t Expected Output : {input_value[i]}  \t Obtained Output : {int(dut.out.value)} "
 ```
 
-The assert statement is used for comparing the adder's outut to the expected value.
 
-The following error is seen:
-```
-assert dut.sum.value == A+B, "Adder result is incorrect: {A} + {B} != {SUM}, expected value={EXP}".format(
-                     AssertionError: Adder result is incorrect: 7 + 5 != 2, expected value=12
-```
-## Test Scenario **(Important)**
-- Test Inputs: a=7 b=5
-- Expected Output: sum=12
-- Observed Output in the DUT dut.sum=2
-
-Output mismatches for the above inputs proving that there is a design bug
-
-## Design Bug
+## Bug
 Based on the above test input and analysing the design, we see the following
 
-```
- always @(a or b) 
-  begin
-    sum = a - b;             ====> BUG
-  end
-```
-For the adder design, the logic should be ``a + b`` instead of ``a - b`` as in the design code.
+![image](./level1design1_images/level1design1_images1.png)
+
+
 
 ## Design Fix
 Updating the design and re-running the test makes the test pass.
 
-![](https://i.imgur.com/5XbL1ZH.png)
+![image](./level1design1_images/output.png)
 
-The updated design is checked in as adder_fix.v
+The updated design is checked in as seq_detect_1011_corrected.v
 
 ## Verification Strategy
+- on analyzing the output obtained and comparing with the individual input the bug location is identified and rectified 
 
 ## Is the verification complete ?
+ Verification is complete, many test cases have been simulated.
