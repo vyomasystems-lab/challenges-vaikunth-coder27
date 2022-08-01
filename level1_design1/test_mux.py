@@ -14,7 +14,7 @@ async def test_mux(dut):
     for i in range(31):
         dut.sel.value = i
         await Timer(1, units='ns')
-        dut._log.info(f"input :{eval(f'dut.inp{i}.value')}\t Select line : {i}  \t Expected Output : {input_value[i]}  \t Obtained Output : {int(eval(f'dut.out.value'))} ")
-        assert int(dut.out.value) == input_value[i], f"input :{eval(f'dut.inp{i}.value')}\t Select line : {i}  \t Expected Output : {input_value[i]}  \t Obtained Output : {int(eval(f'dut.out.value'))} "
+        dut._log.info(f"input :{eval(f'dut.inp{i}.value')}\t Select line : {i}  \t Expected Output : {input_value[i]}  \t Obtained Output : {int(dut.out.value)} ")
+        assert int(dut.out.value) == input_value[i], f"input :{eval(f'dut.inp{i}.value')}\t Select line : {i}  \t Expected Output : {input_value[i]}  \t Obtained Output : {int(dut.out.value)} "
 
     cocotb.log.info('##### CTB: Develop your test here ########')
