@@ -422,9 +422,9 @@ assign r_key[0:127] = mx_key[0:127]^ko[0:127];
 endmodule
 
 
-module main(data,key,en_key,en_key0,en_key1,en_key2,en_key3,en_key4,en_key5,en_key6,en_key7,en_key8);//
+module main(data,key,en_key9,en_key0,en_key1,en_key2,en_key3,en_key4,en_key5,en_key6,en_key7,en_key8);//
 input [0:127] data,key;
-output [0:127] en_key;
+output [0:127] en_key9;
 //output reg [0:127] round_key [0:8];
 output wire [0:127] en_key0,en_key1,en_key2,en_key3,en_key4,en_key5,en_key6,en_key7,en_key8;
 wire [0:127] s_key0,s_key1,s_key2,s_key3,s_key4,s_key5,s_key6,s_key7,s_key8,s_key9;
@@ -448,7 +448,7 @@ sub_byte s0(pr_key,s_key0);
 
 shift_row r0(s_key0,r_key0);
 
-mix_col m0(r_key0,mx_key0);
+mix_col m0(r_key0,mx_key0); 
 
 //add round key operation
 
@@ -529,7 +529,7 @@ sub_byte s5(en_key4,s_key5);
 
 shift_row r5(s_key5,r_key5);
 
-mix_col  m5(r_key5,mx_key5);
+mix_col  m5(s_key5,mx_key5); //BUG INSERTED HERE 
 
 //add round key operation
 
@@ -611,5 +611,5 @@ shift_row r9 (s_key9,sh_key9);
 
 //add round key operation
 
-key_gen k9(gen_key8,sh_key9,32'h36000000,gen_key9,en_key);
+key_gen k9(gen_key8,sh_key9,32'h36000000,gen_key9,en_key9);
 endmodule
