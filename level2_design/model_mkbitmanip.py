@@ -444,7 +444,7 @@ def bitmanip(mav_putvalue_instr, mav_putvalue_src1,mav_putvalue_src2, mav_putval
         if(imm_value1=='0') and (imm_value2=='1'):
             mav_putvalue_src1=(mav_putvalue_src1<<1)|1
             return mav_putvalue_src1
-        if((imm_value1=='0') and (imm_value2=='0')) or ((imm_value1=='1') and (imm_value2=='1'))  :
+        if((imm_value1=='0') and (imm_value2=='0')) and ((imm_value1=='1') and (imm_value2=='1'))  : #BUG DETECTED 
             if (mav_putvalue_src1 > mav_putvalue_src2):
                 mav_putvalue_src1=(mav_putvalue_src1<<1)|1
                 return mav_putvalue_src1
